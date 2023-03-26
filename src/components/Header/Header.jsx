@@ -1,18 +1,21 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.scss";
+import { Link, NavLink } from "react-router-dom";
 function Header() {
   return (
     <Navbar className="navbar d-flex" variant="dark">
       <Container>
-        <Navbar.Brand href="/">FC Market</Navbar.Brand>
+        <NavLink to="/">
+          <Navbar.Brand>FC Market</Navbar.Brand>
+        </NavLink>
         <Nav.Item className="d-flex">
-          <Nav.Link href="/cart" variant="dark">
+          <NavLink to="/cart" variant="dark">
             <i className="bx bx-cart"></i>
-          </Nav.Link>
-          <Nav.Link href="/account" variant="dark">
+          </NavLink>
+          <NavLink to="/account" variant="dark">
             <i className="bx bxs-user"></i>
-          </Nav.Link>
+          </NavLink>
         </Nav.Item>
       </Container>
     </Navbar>

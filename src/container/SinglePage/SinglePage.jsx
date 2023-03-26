@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Button, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { productDetailsAction } from "../../reducer/action";
+import { addCart, productDetailsAction } from "../../reducer/action";
 
 function SinglePage() {
   const { id } = useParams();
   const { loading, product } = useSelector((state) => state.detailsReducer);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productDetailsAction(id));
   }, [dispatch, id]);
+  const addProduct = () => {
+    dispatch(addCart(product));
+    navigate("/cart");
+  };
+
   const detailsProduct = (
     <Row>
       <Col md={6}>
@@ -32,7 +37,9 @@ function SinglePage() {
       <Col md={3}>
         <ListGroup variant="flush">
           <ListGroup.Item>
-            <Button variant="btn btn-outline-success">افزودن به سبد خرید</Button>
+            <Button variant="btn btn-outline-success" onClick={addProduct}>
+              افزودن به سبد خرید
+            </Button>
           </ListGroup.Item>
         </ListGroup>
       </Col>
